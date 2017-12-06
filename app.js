@@ -1,16 +1,20 @@
-//requiring
+//requiring express
 const express = require('express');
+
+//Router
+const router = require('./controller/router');
 
 //express app
 const app = express();
 
-//Routing
-app.get('/',function(request, response) {
-  response.send('this is the homepage');
-});
+//setting up the view files
+app.set('view engine','ejs');
 
-app.get('/contact',function(request, response) {
-  response.send('this is the contact');
-});
+//assets handling
+app.use('/assets',express.static('assets'));
 
-app.listen(process.env.PORT || 3000);
+router(app);
+
+
+app.listen(process.env.PORT || 4000);
+console.log("listening to port 4000");
