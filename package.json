@@ -1,0 +1,14 @@
+{
+  "name": "drawing",
+  "version": "1.0.0",
+  "description": "A little bit about canvas",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Subesh",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
