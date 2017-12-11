@@ -1,11 +1,10 @@
-
-
 let selectObject;
 var zoom = 1;
 var zMin = 0.5;
 var zMax = 9.00;
 var sensativity = 0.00005;
 let canZoom = true;
+
 function setup() {
   let canvas = createCanvas(2000, 900);
 
@@ -34,8 +33,11 @@ function setup() {
 
   //graphicsItem.item.push(b1, s1 ,s2,s3,s3,s4,s5,s6,s7,circle1,circle2,circle3,circle4,circle5,circle6);
 
-//  console.log(subesh);
-noLoop();
+  //  console.log(subesh);
+  let a = new DFADrawer(subesh);
+
+  graphicsItem.item.push(a);
+  noLoop();
 }
 
 function draw() {
@@ -50,32 +52,29 @@ function draw() {
 
 
 function touchStarted() {
-if(touches.length) {
-  console.log(touches);
-  touchCache.push(
-    {x:touches[touches.length-1].x,y:touches[touches.length-1].y}
-  );
-  console.log(touchCache);
+  if (touches.length) {
+    console.log(touches);
+    touchCache.push({
+      x: touches[touches.length - 1].x,
+      y: touches[touches.length - 1].y
+    });
+    console.log(touchCache);
+  }
+  console.log(mouseX + " " + mouseY);
+  console.log(mouseX * zoom + " " + mouseY * zoom);
+  console.log(mouseX / zoom + " " +  mouseY / zoom);
+  redraw();
 }
-console.log(mouseX+ " "+ mouseY);
-console.log(mouseX*zoom+ " " +mouseY*zoom);
-console.log(mouseX/zoom+ " " +mouseY/zoom);
-   redraw();
-}
-function mouseMoved() {
-  console.log('Sss');
 
-
-}
 
 function touchMoved(e) {
 
-  if(touchCache.length === 2 && canZoom) {
+  if (touchCache.length === 2 && canZoom) {
     console.log('SDSDS');
-    let d1 = dist(touchCache[0].x,touchCache[0].y,touchCache[1].x,touchCache[1].y);
-    let d2 = dist(touches[0].x,touches[0].y,touches[1].x,touches[1].y)
+    let d1 = dist(touchCache[0].x, touchCache[0].y, touchCache[1].x, touchCache[1].y);
+    let d2 = dist(touches[0].x, touches[0].y, touches[1].x, touches[1].y)
     console.log(d1 + " " + d2);
-    if(d1 > d2) {
+    if (d1 > d2) {
       zoom -= 0.5;
       console.log("HEREWEW");
     } else {
@@ -90,15 +89,15 @@ function touchMoved(e) {
   }
   // console.log('touch');
   if (!selectObject) {
-    selectObject = graphicsItem.handleDrag(mouseX/zoom, mouseY/zoom);
+    selectObject = graphicsItem.handleDrag(mouseX / zoom, mouseY / zoom);
 
   } else {
     //console.log('here');
-    selectObject.setPos(mouseX/zoom, mouseY/zoom);
+    selectObject.setPos(mouseX / zoom, mouseY / zoom);
 
   }
-   redraw();
-  if(selectObject) {
+  redraw();
+  if (selectObject) {
     return false;
   }
 }
@@ -110,16 +109,16 @@ function touchEnded() {
   touchCache.pop();
   if (selectObject)
     selectObject = undefined;
-    canZoom = true;
-     redraw();
+  canZoom = true;
+  redraw();
 }
 
 function mouseWheel(event) {
-    console.log("what");
+  console.log("what");
   zoom += sensativity * event.delta;
   console.log(event.delta);
   zoom = constrain(zoom, zMin, zMax);
-   redraw();
+  redraw();
 
   //uncomment to block page scrolling
   return false;
@@ -190,19 +189,6 @@ let graphicsItem = {
 
 
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

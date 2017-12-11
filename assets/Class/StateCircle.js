@@ -18,6 +18,33 @@ class StateCircle {
   addLinkFrom(link) {
     this.link.from.push(link);
   }
+
+  hasLinkFrom(state) {
+    let link  = this.link.from;
+
+    let has = link.find(item => {
+      return item.state == state;
+    });
+
+    if(has)
+      return has.link;
+    else
+      return false;
+  }
+
+  hasLinkTo(state) {
+    let link  = this.link.to;
+
+    let has = link.find(item => {
+      return item.state == state;
+    });
+
+    if(has)
+      return has.link;
+    else
+      return false;
+  }
+
   draw() {
     push();
     stroke(1);
@@ -72,11 +99,6 @@ class StateCircle {
   setPos(x,y) {
     this.center.x = x + this.dragedPoint.x;
     this.center.y = y + this.dragedPoint.y;
-  }
-
-  addLink(state,a) {
-    this.link.push({state : state,input : []})
-
   }
 
   setFinal() {

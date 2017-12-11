@@ -2,6 +2,12 @@
  * @class - DFADrawer
  * makes a DFA Diagram using the
  * DFA Class combining its tuples with @class StateArc and @class StateCircle.
+ * @constructor - Takes one param
+ * @param {DFA} dfa Must be of the @class DFA
+ * @member this.dfa - The DFA
+ * @member this.states - Array of StateCircle
+ * @member this.links - Arrat of StateArcs
+ * @member this.children - childrens
  * @author Subesh Bhandari
  * @version 0.1
  */
@@ -14,12 +20,6 @@ class DFADrawer {
    *
    */
   constructor(dfa) {
-    /**
-     * @member this.dfa - The DFA
-     * @member this.states - Array of StateCircle
-     * @member this.links - Arrat of StateArcs
-     * @member this.children - childrens
-     */
     this.dfa = dfa;
     this.states = [];
     this.links = [];
@@ -28,7 +28,7 @@ class DFADrawer {
     try {
       this.createDiagram();
     } catch (e) {
-      console.log("Unexpected error\n Dfa not defined " + e );
+      console.log("Unexpected error\n Dfa not defined " + e);
     }
   }
 
@@ -47,10 +47,10 @@ class DFADrawer {
 
       //Second identify start and final state
       this.createStart();
-    //  this.createFinal();
+      this.createFinal();
 
       //Third - createLink (transitions)
-      // this.createLink();
+      this.createLink();
     } else {
       throw ("Subesh");
     }
@@ -67,14 +67,16 @@ class DFADrawer {
 
     //Initial state position
     let posX = 100;
-    let posY = 100;
+    let posY = 300;
 
     //looping through each state
     states.forEach((state) => {
       //A new State Circle
       let stateCircle = new StateCircle(state, posX, posY);
+
       //Appending to states
       this.states.push(stateCircle);
+
       //Appending children so that they can be drawn
       this.children.push(stateCircle);
 
@@ -98,20 +100,89 @@ class DFADrawer {
     /**finding the initial State and applying isStart = true (done by @function StateCircle.setStart())
      * can only be one
      */
-    states.find((state)=> {
+    states.find((state) => {
       return state.stateName === initial;
     }).setStart();
 
   }
 
+
+  /**
+   * createFinal - Creates the final States (double circle)
+   *
+   * @return {undefined}
+   */
   createFinal() {
     //list of Final
     let final = this.dfa.final;
 
-    final.forEach((state)=> {
+    //list of StateCircle
+    let states = this.states;
 
+    //Making final States
+
+    //Looping through States
+    states.forEach((state) => {
+      //checking if the state is final or not
+      final.every((final) => {
+
+        if (final == state.stateName) {
+          state.setFinal();
+          return false;
+        }
+        return true;
+      });
     });
 
+  }
+
+
+  /**
+   * createLink - Creates a link among the StateCircle with the help of DFA.transition (this.dfa.transition)
+   *
+   * @return {undefined}
+   */
+  createLink() {
+    let states = this.states;
+
+    let transition = this.dfa.transition;
+
+    for (let stateName in transition) {
+      for (let input in transition[stateName]) {
+
+        let to = states.find((state) => {
+          return state.stateName === transition[stateName][input];
+        });
+
+        let from = states.find((state) => {
+          return state.stateName === stateName;
+        });
+
+        let reflect = undefined;
+        let link ;
+        let linkFrom = from.hasLinkFrom(to);
+        let linkTo = from.hasLinkTo(to);
+        if ( linkFrom ) {
+          reflect = 1;
+          console.log(linkFrom);
+        }
+
+        if (linkTo) {
+          console.log("It has");
+          linkTo.text.push(input);
+        }
+         else {
+          link = new StateArc(from, to, input, reflect);
+          from.addLinkTo({state:to,link:link});
+          to.addLinkFrom({state:from,link:link});
+          this.children.unshift(link);
+        }
+
+
+
+        console.log(`${from.stateName} -- ${input} -- > ${to.stateName}`);
+      }
+    }
   }
   draw() {
 

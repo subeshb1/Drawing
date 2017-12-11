@@ -157,7 +157,9 @@ class StateArc extends Bezier {
       text((this.text.join(",")) ? this.text : "", this.textCoord.x, this.textCoord.y);
       pop();
   }
-
+  handleDrag() {
+    
+  }
 
 
 }
