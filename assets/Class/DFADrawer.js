@@ -39,6 +39,9 @@ class DFADrawer {
    * @return {null} no return
    */
   createDiagram() {
+    this.states = [];
+    this.links = [];
+    this.children = [];
     //Check if dfa defined or not
     if (this.dfa) {
 

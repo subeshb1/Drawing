@@ -4,10 +4,10 @@ var zMin = 0.5;
 var zMax = 9.00;
 var sensativity = 0.00005;
 let canZoom = true;
-
+let a = new DFADrawer(subesh);
 function setup() {
   let canvas = createCanvas(2000, 900);
-
+  canvas.parent('parent');
   console.log(canvas);
   // let state = [];
   // let transition = [];
@@ -34,7 +34,7 @@ function setup() {
   //graphicsItem.item.push(b1, s1 ,s2,s3,s3,s4,s5,s6,s7,circle1,circle2,circle3,circle4,circle5,circle6);
 
   //  console.log(subesh);
-  let a = new DFADrawer(subesh);
+
 
   graphicsItem.item.push(a);
   noLoop();
