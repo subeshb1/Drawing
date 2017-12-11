@@ -1,14 +1,11 @@
-let DFA = function () {
-  this.state  = [];
-  this.alphabet = [];
-  this.final = [];
-  this.initial = [];
-  this.transition = [];
-}
 
-class DFAGenerator extends DFA{
+class DFA {
   constructor(obj) {
-    super();
+    this.state  = [];
+    this.alphabet = [];
+    this.final = [];
+    this.initial = [];
+    this.transition = [];
     this.map(obj);
   }
 
@@ -37,9 +34,10 @@ class DFAGenerator extends DFA{
       console.log("Accepted");
   }
 
+
 }
 
-let obj = {
+let DFATuples = {
   state: ["q0","q1","q2"],
   alphabet : ['0','1'],
   final : ['q2'],
@@ -61,7 +59,7 @@ let obj = {
 }
 
 
-let subesh = new DFAGenerator(obj);
+let subesh = new DFA(DFATuples);
 
 
 console.log(subesh);

@@ -14,4 +14,8 @@ app.get('/profile/:name', function(req,res) {
   res.send('this is the contact');
 });
 
+app.get('/javascript', function(req,res) {
+  res.render('javascript');
+});
+
 };

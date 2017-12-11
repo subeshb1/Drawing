@@ -1,3 +1,4 @@
-body {
-  
+canvas{
+  overflow: scroll;rgb(143, 143, 143)
+  color: rgb(30, 69, 143)
 }
