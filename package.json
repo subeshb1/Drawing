@@ -4,12 +4,16 @@
   "description": "A little bit about canvas",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "author": "Subesh",
   "license": "ISC",
   "dependencies": {
     "ejs": "^2.5.7",
     "express": "^4.16.2"
+  },
+  "engines" : {
+    "node" : "8.9.1"
   }
 }
