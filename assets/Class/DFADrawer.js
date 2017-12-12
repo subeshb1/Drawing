@@ -146,45 +146,58 @@ class DFADrawer {
    * @return {undefined}
    */
   createLink() {
-    let states = this.states;
+    try {
+      let states = this.states;
 
-    let transition = this.dfa.transition;
+      let transition = this.dfa.transition;
 
-    for (let stateName in transition) {
-      for (let input in transition[stateName]) {
+      for (let stateName in transition) {
+        for (let input in transition[stateName]) {
 
-        let to = states.find((state) => {
-          return state.stateName === transition[stateName][input];
-        });
+          let to = states.find((state) => {
+            return state.stateName === transition[stateName][input];
+          });
 
-        let from = states.find((state) => {
-          return state.stateName === stateName;
-        });
+          let from = states.find((state) => {
+            return state.stateName === stateName;
+          });
 
-        let reflect = undefined;
-        let link ;
-        let linkFrom = from.hasLinkFrom(to);
-        let linkTo = from.hasLinkTo(to);
-        if ( linkFrom ) {
-          reflect = 1;
-          console.log(linkFrom);
+          let reflect = undefined;
+          let link;
+          let linkFrom = from.hasLinkFrom(to);
+          let linkTo = from.hasLinkTo(to);
+          if (linkFrom) {
+            reflect = 1;
+            console.log(linkFrom);
+          }
+
+          if (linkTo) {
+            console.log("It has");
+            linkTo.input.push(input);
+            linkTo.link.text.push(input);
+          } else {
+            link = new StateArc(from, to, input, reflect);
+            from.addLinkTo({
+              state: to,
+              link: link,
+              input : [input]
+            });
+            to.addLinkFrom({
+              state: from,
+              link: link,
+              input : [input]
+            });
+            this.children.unshift(link);
+          }
+
+          console.log(`${from.stateName} -- ${input} -- > ${to.stateName}`);
         }
-
-        if (linkTo) {
-          console.log("It has");
-          linkTo.text.push(input);
-        }
-         else {
-          link = new StateArc(from, to, input, reflect);
-          from.addLinkTo({state:to,link:link});
-          to.addLinkFrom({state:from,link:link});
-          this.children.unshift(link);
-        }
-
-
-
-        console.log(`${from.stateName} -- ${input} -- > ${to.stateName}`);
       }
+    } catch (e) {
+      alert('There seems to be an Error in the input.\n Please fill in the inputs properly!');
+      this.states = [];
+      this.links = [];
+      this.children = [];
     }
   }
   draw() {

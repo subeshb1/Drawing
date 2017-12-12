@@ -114,6 +114,7 @@ function touchEnded() {
 }
 
 function mouseWheel(event) {
+  if(event.ctrlKey) {
   console.log("what");
   zoom += sensativity * event.delta;
   console.log(event.delta);
@@ -122,6 +123,7 @@ function mouseWheel(event) {
 
   //uncomment to block page scrolling
   return false;
+}
 }
 
 

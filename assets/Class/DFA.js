@@ -39,7 +39,7 @@ class DFA {
 
 let DFATuples = {
   state: ["q0","q1","q2",'q3'],
-  alphabet : ['a','b'],
+  alphabet : ['0','1'],
   final : ['q3'],
   initial : ['q0'],
   transition : {

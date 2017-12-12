@@ -76,7 +76,7 @@
   <!-- /.modal -->
 
 
-  <button class="btn btn-primary" data-toggle="modal" data-target="#modal-1">DFA Settings</button>
+  <button class="btn btn-primary" data-toggle="modal" data-target="#modal-1" id="modalBut">DFA Settings</button>
   <div id="parent"></div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
@@ -90,11 +90,16 @@
   <script src="/assets/Class/curves.js"></script>
   <script src="/assets/Class/StateArc.js"></script>
   <script src="/assets/Class/DFADrawer.js"></script>
+  <script src="/assets/Class/DFAChecker.js"></script>
   <script src="/assets/sketch.js"></script>
 
   <script>
 
     $(document).ready(function() {
+
+      $('#modalBut').on('click',function() {
+          makeModal();
+      });
       function makeModal() {
       //state
       $('#state').val(DFATuples.state.join(','));
@@ -119,7 +124,7 @@
         for(let input in transition[state]) {
           if(inputCheck)
             $('thead tr').append(`<th>${input}</th>`);
-            $('tbody tr').last().append(`<td><input type="text" value = ${transition[state][input]} class="form-control col-10"></td>`);
+            $('tbody tr').last().append(`<td><input type="text" value = "${transition[state][input]}" class="form-control col-10"></td>`);
 
         }
         inputCheck = 0;

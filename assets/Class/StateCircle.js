@@ -27,7 +27,7 @@ class StateCircle {
     });
 
     if(has)
-      return has.link;
+      return has;
     else
       return false;
   }
@@ -40,7 +40,7 @@ class StateCircle {
     });
 
     if(has)
-      return has.link;
+      return has;
     else
       return false;
   }
