@@ -24,9 +24,9 @@ class StateArc extends Bezier {
       distance: dist(start.x, start.y, end.x, end.y),
       angle: Math.atan((start.y - end.y) / (start.x - end.x)),
       rotate: function(v, angle) {
-        //console.log(v);
+        ////console.log(v);
         v.rotate(angle);
-        //console.log(v);
+        ////console.log(v);
       },
       translate: function(...args) {
         args.forEach((item) => {
@@ -59,8 +59,8 @@ class StateArc extends Bezier {
           this.textCoord.x = textX;
 
           if (reflect !== undefined && Math.abs(this.angle) !== 1.5707963267948966) {
-            console.log("why");
-            console.log(this.angle);
+            //console.log("why");
+            //console.log(this.angle);
             this.textCoord.y = -this.distance / 7 - 25;
             stateCurve.reflect(this.v3, this.v4, this.textCoord);
           } else
@@ -81,7 +81,7 @@ class StateArc extends Bezier {
       reflect: function(...args) {
         args.forEach((item) => {
           item.y = -item.y;
-          //console.log(item);
+          ////console.log(item);
         });
       }
 
@@ -96,7 +96,7 @@ class StateArc extends Bezier {
     this.ctrlPt.p2.y = stateCurve.v3.y;
     this.ctrlPt.p3.x = stateCurve.v4.x;
     this.ctrlPt.p3.y = stateCurve.v4.y;
-    console.log('i was called');
+    //console.log('i was called');
     let p1 = this.curveGenerator(this.ctrlPt, 0.5, {x: 0,y: 0});
 
     if (start !== end)
@@ -107,7 +107,7 @@ class StateArc extends Bezier {
     let v1 = new p5.Vector(p1.x, p1.y);
     let v2 = new p5.Vector(-5, 5);
     let v3 = new p5.Vector(-5, -5);
-    console.log(stateCurve.angle);
+    //console.log(stateCurve.angle);
     if (!stateCurve.isLeft) {
       v2.x = 5;
       v3.x = 5;
@@ -118,6 +118,7 @@ class StateArc extends Bezier {
     this.arrow = { p1: v1, p2: v2.add(v1), p3: v3.add(v1) };
 
   }
+
 
 
   rotate(point, angle) {
@@ -158,7 +159,7 @@ class StateArc extends Bezier {
       pop();
   }
   handleDrag() {
-    
+
   }
 
 

@@ -18,7 +18,11 @@ class DFAChecker {
    */
   constructor(drawer) {
     this.drawer = drawer;
-
+    this.string = '';
+    this.current = {};
+    this.interval = undefined;
+    this.list = [];
+    this.counter = 0;
   }
 
   /**
@@ -37,6 +41,8 @@ class DFAChecker {
       return state.isStart;
     });
 
+    //append to list;
+    this.list.push(state);
     //throws an error if there are no symbols in the given alphabet sets
     try {
       //Finding the transition for each input
@@ -49,16 +55,42 @@ class DFAChecker {
         *
         * @return {type} Description
         */
-        state = state.link.to.find((link) => {
+        let linkTo = state.link.to.find((link) => {
           return link.input.find((item) => item === string[i]);
-        }).state;
+        });
+        let link = linkTo.link;
+        this.list.push(link);
+        state = linkTo.state;
+        this.list.push(state);
 
       }
+        this.start();
     } catch (e) {
       console.log('No such Symbol');
       return "REJECED";
     }
 
-    return state.isFinal?"Accepted":"Rejected";
+    //return state.isFinal?"Accepted":"Rejected";
   }
+
+
+  start() {
+    this.interval = setInterval(this.transit,800,this);
+
+  }
+
+  transit(that) {
+
+    if(that.counter < that.list.length) {
+      console.log(that.list[0]);
+      that.list[that.counter].color = {r:0,g:255,b:0};
+      if(that.counter!=0)
+      that.list[that.counter-1].color = {r:255,g:0,b:0};
+      that.counter++;
+      redraw();
+    }
+    else
+      clearInterval(that.interval);
+  }
+
 }

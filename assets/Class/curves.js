@@ -2,6 +2,7 @@ class ParametricCurve{
   constructor(controlPoint,control) {
     this.ctrlPt = controlPoint;
     this.children = [];
+    this.color = {r:0,g:0,b:0};
     if(!control)
     this.drawControlPoint();
   }
@@ -16,7 +17,11 @@ class ParametricCurve{
     for(let i = 0; i <= 100; i++) {
       var t = i/100;
       point = this.curveGenerator(this.ctrlPt,t,point);
+      push();
+      stroke(this.color.r,this.color.g,this.color.b);
+      strokeWeight(1);
       line(point.x,point.y,lastPoint.x,lastPoint.y);
+      pop();
       lastPoint.x = point.x;
       lastPoint.y = point.y;
 
@@ -67,9 +72,11 @@ class MovableCircle{
 
   }
   draw() {
-    stroke(1);
+    push();
+    stroke(this.color.r,this.color.g,this.color.b);
     ellipseMode(CENTER)
     ellipse(this.p.x,this.p.y,this.diameter);
+    pop();
 
   }
   handleDrag(mouseX,mouseY) {

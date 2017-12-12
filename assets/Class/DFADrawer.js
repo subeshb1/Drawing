@@ -28,7 +28,7 @@ class DFADrawer {
     try {
       this.createDiagram();
     } catch (e) {
-      console.log("Unexpected error\n Dfa not defined " + e);
+      //console.log("Unexpected error\n Dfa not defined " + e);
     }
   }
 
@@ -168,11 +168,11 @@ class DFADrawer {
           let linkTo = from.hasLinkTo(to);
           if (linkFrom) {
             reflect = 1;
-            console.log(linkFrom);
+            //console.log(linkFrom);
           }
 
           if (linkTo) {
-            console.log("It has");
+            //console.log("It has");
             linkTo.input.push(input);
             linkTo.link.text.push(input);
           } else {
@@ -190,7 +190,7 @@ class DFADrawer {
             this.children.unshift(link);
           }
 
-          console.log(`${from.stateName} -- ${input} -- > ${to.stateName}`);
+          //console.log(`${from.stateName} -- ${input} -- > ${to.stateName}`);
         }
       }
     } catch (e) {
