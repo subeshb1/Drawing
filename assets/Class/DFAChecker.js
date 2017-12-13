@@ -103,19 +103,24 @@ class DFAChecker {
     if(that.counter < that.list.length) {
       console.log(that.list[0]);
 
-      that.list[that.counter].color = {r:242,g:240,b:103};
-      if(that.counter!=0)
+      that.list[that.counter].color = {r:227,g:212,b:162};
+      that.list[that.counter].fill = {r:255,g:243,b:205};
+      if(that.counter!=0) {
       that.list[that.counter-1].color = {r:0,g:0,b:0};
+      that.list[that.counter-1].fill = {r:255,g:255,b:255};
+    }
       that.counter++;
       redraw();
     }
     else {
       if(that.list[that.counter-1].isFinal)   {
-        that.list[that.counter-1].color = {r:0,g:200,b:0};
+        that.list[that.counter-1].color = {r:150,g:211,b:165};
+        that.list[that.counter-1].fill =  {r:212,g:237,b:218};
         $('#accept').trigger('click');
 
       } else  {
-        that.list[that.counter-1].color = {r:200,g:0,b:0};
+        that.list[that.counter-1].color = {r:231,g:173,b:178};
+        that.list[that.counter-1].fill  = {r:248,g:215,b:218};
         $('#reject').show(200);
       }
       redraw();
@@ -129,6 +134,7 @@ class DFAChecker {
     if(this.list.length) {
       this.list.forEach((item) => {
         item.color = {r:0,g:0,b:0};
+        item.fill = {r:255,g:255,b:255};
       })
     }
   }

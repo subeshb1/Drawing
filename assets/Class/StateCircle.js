@@ -12,6 +12,7 @@ class StateCircle {
     this.isFinal = false;
     this.link = {to:[],from:[]};
     this.color = {r:0,g:0,b:0};
+    this.fill = {r:255,g:255,b:255};
   }
   addLinkTo(link) {
     this.link.to.push(link);
@@ -50,7 +51,7 @@ class StateCircle {
     push();
     stroke(this.color.r,this.color.g,this.color.b);
     strokeWeight(1.5);
-    fill(255);
+    fill(this.fill.r,this.fill.g,this.fill.b);
     ellipseMode(CENTER);
     ellipse(this.center.x,this.center.y,this.diameter);
     pop();
@@ -80,7 +81,7 @@ class StateCircle {
     push();
     stroke(this.color.r,this.color.g,this.color.b);
     strokeWeight(1.5);
-    fill(255);
+    fill(this.fill.r,this.fill.g,this.fill.b);
     ellipseMode(CENTER);
     ellipse(this.center.x,this.center.y,this.diameter-10);
     pop();
