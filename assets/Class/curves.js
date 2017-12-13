@@ -19,7 +19,7 @@ class ParametricCurve{
       point = this.curveGenerator(this.ctrlPt,t,point);
       push();
       stroke(this.color.r,this.color.g,this.color.b);
-      strokeWeight(1);
+      strokeWeight(1.5);
       line(point.x,point.y,lastPoint.x,lastPoint.y);
       pop();
       lastPoint.x = point.x;

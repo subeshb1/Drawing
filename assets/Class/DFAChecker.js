@@ -22,14 +22,16 @@ class DFAChecker {
     this.current = {};
     this.interval = undefined;
     this.list = [];
+    this.time = 200;
     this.counter = 0;
   }
 
   /**
-   * check - Description
+   * check - This function is used to check whether a given input is accepted or not
+   * @summary - FIrst it checks the transition and stores in this.list. If it doesn;t throw any exception then it fires start() which triggers the annimationwith setInterval().
    *
    * @param {String} string The string to check whether it is accepted or not
-   *
+   * @callback this.start();
    * @return {String} Accepted/Regected
    */
   check(string) {
@@ -64,9 +66,12 @@ class DFAChecker {
         this.list.push(state);
 
       }
+
+      //this start helps to trigger the annimation according to the interval
         this.start();
     } catch (e) {
       console.log('No such Symbol');
+      alert("The input string consists of symbols not in the alphabet set");
       return "REJECED";
     }
 
@@ -74,23 +79,55 @@ class DFAChecker {
   }
 
 
+
+  /**
+   * start - Sets the interval
+   *
+   * @return {type} Description
+   */
   start() {
-    this.interval = setInterval(this.transit,800,this);
+    this.interval = setInterval(this.transit,this.time,this);
 
   }
 
+
+  /**
+   * transit - Loops throuch list one by one in each call
+   *
+   * @param {DFAChecker} that Requred because setInterval is a window function;
+   *
+   * @return {none}
+   */
   transit(that) {
 
     if(that.counter < that.list.length) {
       console.log(that.list[0]);
-      that.list[that.counter].color = {r:0,g:255,b:0};
+
+      that.list[that.counter].color = {r:242,g:240,b:103};
       if(that.counter!=0)
-      that.list[that.counter-1].color = {r:255,g:0,b:0};
+      that.list[that.counter-1].color = {r:0,g:0,b:0};
       that.counter++;
       redraw();
     }
-    else
+    else {
+      if(that.list[that.counter-1].isFinal)   {
+        that.list[that.counter-1].color = {r:0,g:200,b:0};
+
+      } else  {
+        that.list[that.counter-1].color = {r:200,g:0,b:0};
+      }
+      redraw();
       clearInterval(that.interval);
+
+    }
+  }
+
+  resetColor() {
+    if(this.list.length) {
+      this.list.forEach((item) => {
+        item.color = {r:0,g:0,b:0};
+      })
+    }
   }
 
 }

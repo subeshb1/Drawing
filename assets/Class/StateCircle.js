@@ -49,6 +49,7 @@ class StateCircle {
   draw() {
     push();
     stroke(this.color.r,this.color.g,this.color.b);
+    strokeWeight(1.5);
     fill(255);
     ellipseMode(CENTER);
     ellipse(this.center.x,this.center.y,this.diameter);
@@ -66,10 +67,11 @@ class StateCircle {
     push();
     stroke(this.color.r,this.color.g,this.color.b);
     fill(100);
+
     let p = {x : this.center.x - this.diameter/2,y: this.center.y};
     triangle(p.x,p.y,p.x-8,p.y-8,p.x-8,p.y+8);
     stroke(100);
-    strokeWeight(3);
+    strokeWeight(1.5);
     line(p.x-8,p.y,p.x-50,p.y);
     pop();
   }
@@ -77,6 +79,7 @@ class StateCircle {
   drawFinal() {
     push();
     stroke(this.color.r,this.color.g,this.color.b);
+    strokeWeight(1.5);
     fill(255);
     ellipseMode(CENTER);
     ellipse(this.center.x,this.center.y,this.diameter-10);
