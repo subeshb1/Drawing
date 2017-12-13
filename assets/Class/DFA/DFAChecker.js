@@ -37,7 +37,7 @@ class DFAChecker {
   check(string) {
     //stirng length
     let len = string.length;
-
+    this.list = [];
     //Initial State
     let state = this.drawer.states.find((state) => {
       return state.isStart;
@@ -86,6 +86,8 @@ class DFAChecker {
    * @return {type} Description
    */
   start() {
+    this.counter = 0;
+
     this.interval = setInterval(() => this.transit(this),this.time);
 
   }
@@ -101,7 +103,7 @@ class DFAChecker {
   transit(that) {
 
     if(that.counter < that.list.length) {
-      console.log(that.list[0]);
+
 
       that.list[that.counter].color = {r:227,g:212,b:162};
       that.list[that.counter].fill = {r:255,g:243,b:205};

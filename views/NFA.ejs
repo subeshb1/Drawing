@@ -17,8 +17,7 @@
 
     #parent {
       overflow: auto;
-      width:1200px;
-      height:600px;
+
     }
   </style>
   <link rel="stylesheet" href="/assets/main.css">
@@ -139,8 +138,10 @@
   </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <button class="btn   btn-outline-primary" data-toggle="modal" data-target="#modal-1" id="modalBut">DFA Settings</button>
-        <button class="btn  btn-outline-success" type="button" data-toggle="modal" data-target="#modal-2" id="inputBut">Input</button>
+        <button class="btn   btn-primary" data-toggle="modal" data-target="#modal-1" id="modalBut">DFA Settings</button>
+        <button class="btn  btn-success" type="button" data-toggle="modal" data-target="#modal-2" id="inputBut">Input</button>
+        <button class="btn  btn-danger" type="button"  id="clickMe">Click Me</button>
+
       </ul>
     </div>
 
@@ -184,11 +185,34 @@
   <script src="/assets/Class/DFA/StateArc.js"></script>
   <script src="/assets/Class/DFA/DFADrawer.js"></script>
   <script src="/assets/Class/DFA/DFAChecker.js"></script>
-  <script src="/assets/Sketch/DFA/sketch.js"></script>
+  <script src="/assets/Sketch/NFA/sketch.js"></script>
 
   <script src="/assets/Backend/DFASettingsHandler.js">
   </script>
   <script src="/assets/Backend/InputHandler.js">
+  </script>
+  <script>
+
+    $(document).ready(function() {
+      let counter = 0;
+      let interval;
+      $('#clickMe').on('click',function() {
+        $('#navCollapseBut').trigger('click');
+        interval = setInterval(function () {
+
+            main[counter].stateName = mainString[counter];
+            main[counter].color = color[counter];
+            main[counter].fill = color[counter];
+            counter++;
+            redraw();
+            if(counter>=main.length) {
+              clearInterval(interval);
+              flag = true;
+              redraw();
+            }
+        }, 100);
+      });
+    });
   </script>
 </body>
 

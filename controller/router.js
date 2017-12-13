@@ -17,5 +17,8 @@ app.get('/profile/:name', function(req,res) {
 app.get('/javascript', function(req,res) {
   res.render('javascript');
 });
+app.get('/NFA', function(req,res) {
+  res.render('NFA');
+});
 
 };
