@@ -76,12 +76,13 @@
           }
 
         });
+          $('#navCollapseBut').trigger('click');
 
       });
       makeModal();
 
       subesh.map(DFATuples);
-      a.createDiagram();
+      drawer.createDiagram();
       redraw();
 
 

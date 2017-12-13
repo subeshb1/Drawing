@@ -1,10 +1,10 @@
 let selectObject;
 var zoom = 1;
-var zMin = 0.5;
+var zMin = 0.01;
 var zMax = 9.00;
 var sensativity = 0.00005;
 let canZoom = true;
-let a = new DFADrawer(subesh);
+let drawer = new DFADrawer(subesh);
 function setup() {
   let canvas = createCanvas(2000, 900);
   canvas.parent('parent');
@@ -36,7 +36,7 @@ function setup() {
   //  console.log(subesh);
 
 
-  graphicsItem.item.push(a);
+  graphicsItem.item.push(drawer);
   noLoop();
 }
 
@@ -69,16 +69,16 @@ function touchStarted() {
 
 function touchMoved(e) {
 
-  if (touchCache.length === 2 && canZoom) {
+  if (touchCache.length === 2 ) {
     console.log('SDSDS');
     let d1 = dist(touchCache[0].x, touchCache[0].y, touchCache[1].x, touchCache[1].y);
     let d2 = dist(touches[0].x, touches[0].y, touches[1].x, touches[1].y)
     console.log(d1 + " " + d2);
     if (d1 > d2) {
-      zoom -= 0.5;
+      zoom -= 0.1;
       console.log("HEREWEW");
     } else {
-      zoom += 0.5;
+      zoom += 0.1;
     }
     zoom = constrain(zoom, zMin, zMax);
     canZoom = false;

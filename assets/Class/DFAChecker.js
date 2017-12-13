@@ -86,7 +86,7 @@ class DFAChecker {
    * @return {type} Description
    */
   start() {
-    this.interval = setInterval(this.transit,this.time,this);
+    this.interval = setInterval(() => this.transit(this),this.time);
 
   }
 
@@ -112,12 +112,15 @@ class DFAChecker {
     else {
       if(that.list[that.counter-1].isFinal)   {
         that.list[that.counter-1].color = {r:0,g:200,b:0};
+        $('#accept').trigger('click');
 
       } else  {
         that.list[that.counter-1].color = {r:200,g:0,b:0};
+        $('#reject').show(200);
       }
       redraw();
       clearInterval(that.interval);
+
 
     }
   }
