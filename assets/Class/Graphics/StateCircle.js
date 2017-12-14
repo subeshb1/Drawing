@@ -89,7 +89,6 @@ class StateCircle {
   drawText() {
     push();
     stroke(this.color.r,this.color.g,this.color.b);
-    textSize(20);
     text(this.stateName,this.center.x - this.stateName.length,this.center.y +  this.stateName.length);
     pop();
   }
