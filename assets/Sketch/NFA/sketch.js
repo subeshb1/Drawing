@@ -19,6 +19,7 @@ function draw() {
   scale(zoom);
 
 
+
   // graphicsItem.draw();
 
 }

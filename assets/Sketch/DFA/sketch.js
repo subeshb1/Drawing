@@ -8,7 +8,7 @@ let drawer = new DFADrawer(subesh);
 function setup() {
   let canvas = createCanvas(2000, 900);
   canvas.parent('parent');
-  
+
   graphicsItem.item.push(drawer);
   noLoop();
 }
@@ -46,18 +46,20 @@ function touchMoved(e) {
     //console.log('SDSDS');
     let d1 = dist(touchCache[0].x, touchCache[0].y, touchCache[1].x, touchCache[1].y);
     let d2 = dist(touches[0].x, touches[0].y, touches[1].x, touches[1].y)
+    console.log(d1 + " " +d2);
     //console.log(d1 + " " + d2);
-    if (d1 > d2) {
+    if (d1 > d2  && Math.abs(d1-d2) > 5) {
       zoom -= 0.1;
       //console.log("HEREWEW");
-    } else {
+    } else if(d1 < d2 && Math.abs(d1-d2) > 5){
       zoom += 0.1;
     }
     zoom = constrain(zoom, zMin, zMax);
     canZoom = false;
-    redraw();
+
     //mouseReleased();
     toucheCache = [];
+    redraw();
     return false;
   }
   // //console.log('touch');
